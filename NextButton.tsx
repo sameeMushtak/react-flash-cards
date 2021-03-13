@@ -10,7 +10,9 @@ class NextButton extends React.Component<INextButtonProps, INextButtonState> {
   render() {
     return (
       <React.Fragment>
-        <button className="btn btn-primary" onClick={this.props.onNext}>Next Card</button>
+        <button className="btn btn-primary m-1" onClick={this.props.onNext}>
+          Next Card
+        </button>
       </React.Fragment>
     );
   }

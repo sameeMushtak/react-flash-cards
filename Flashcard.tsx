@@ -20,7 +20,7 @@ class Flashcard extends React.Component<IFlashcardProps, IFlashcardState> {
   }
   render() {
     return (
-      <div className="card">
+      <div className="card m-1">
         <div className="card-body">
           <h4 className="card-title">{this.props.currentCard.subject}</h4>
           <p className="card-text">
