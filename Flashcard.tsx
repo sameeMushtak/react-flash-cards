@@ -1,18 +1,32 @@
 import React from "react";
 import "./bootstrap.css";
 
-interface FlashcardProps {}
-interface FlashcardState {}
-class Flashcard extends React.Component<FlashcardProps, FlashcardState> {
+interface IFlashcard {
+  subject: string;
+  frontSide: string;
+  backSide: string;
+}
+
+export interface IFlashcardProps {
+  currentCard: IFlashcard;
+  onFrontSide: boolean;
+}
+interface IFlashcardState {}
+
+class Flashcard extends React.Component<IFlashcardProps, IFlashcardState> {
+  constructor(props) {
+    super(props);
+    this.state = {};
+  }
   render() {
     return (
       <div className="card">
         <div className="card-body">
-          <h4 className="card-title">Card title</h4>
-          <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <h4 className="card-title">{this.props.currentCard.subject}</h4>
           <p className="card-text">
-            Some quick example text to build on the card title and make up the
-            bulk of the card's content.
+            {this.props.onFrontSide
+              ? this.props.currentCard.frontSide
+              : this.props.currentCard.backSide}
           </p>
         </div>
       </div>

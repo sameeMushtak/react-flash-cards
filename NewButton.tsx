@@ -1,10 +1,10 @@
 import React from "react";
 import "./bootstrap.css";
 
-interface NewButtonProps {}
-interface NewButtonState {}
+interface INewButtonProps {}
+interface INewButtonState {}
 
-class NewButton extends React.Component<NewButtonProps, NewButtonState> {
+class NewButton extends React.Component<INewButtonProps, INewButtonState> {
   render() {
     return (
       <React.Fragment>

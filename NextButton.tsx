@@ -1,14 +1,16 @@
 import React from "react";
 import "./bootstrap.css";
 
-interface NextButtonProps {}
-interface NextButtonState {}
+interface INextButtonProps {
+  onNext: () => void;
+}
+interface INextButtonState {}
 
-class NextButton extends React.Component<NextButtonProps, NextButtonState> {
+class NextButton extends React.Component<INextButtonProps, INextButtonState> {
   render() {
     return (
       <React.Fragment>
-        <button className="btn btn-primary">Next Card</button>
+        <button className="btn btn-primary" onClick={this.props.onNext}>Next Card</button>
       </React.Fragment>
     );
   }
