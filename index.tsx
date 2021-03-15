@@ -135,6 +135,9 @@ class App extends Component<IAppProps, IAppState> {
         <h1>Study with Flashcards</h1>
         <div>
           <SubjectMenu
+            subjects={this.state.cards
+              .map(c => c.subject)
+              .filter((value, index, self) => self.indexOf(value) === index)}
             onSelect={event => this.handleNext(event.target.value)}
           />
         </div>
