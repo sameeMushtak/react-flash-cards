@@ -6,6 +6,7 @@ interface ICardFormProps {
   onFrontSideChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBackSideChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
+  onToggleForm: () => void;
 }
 interface ICardFormState {
   formOpen: boolean;
@@ -22,7 +23,7 @@ class CardForm extends React.Component<ICardFormProps, ICardFormState> {
   toggleForm = () => {
     this.setState({ formOpen: !this.state.formOpen });
   };
-
+  // Can I add validation to this form?
   render() {
     return (
       <div>
@@ -50,7 +51,13 @@ class CardForm extends React.Component<ICardFormProps, ICardFormState> {
             onChange={this.props.onBackSideChange}
           />
         </div>
-        <button className="btn btn-primary m-1" onClick={this.props.onAdd}>
+        <button
+          className="btn btn-primary m-1"
+          onClick={() => {
+            this.props.onAdd();
+            this.props.onToggleForm();
+          }}
+        >
           Add Card
         </button>
       </div>

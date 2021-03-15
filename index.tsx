@@ -19,6 +19,7 @@ interface IAppState {
   cards: IFlashcard[];
   currentIndex: number;
   newCard: IFlashcard;
+  formOpen: boolean;
 }
 
 class App extends Component<IAppProps, IAppState> {
@@ -58,7 +59,8 @@ class App extends Component<IAppProps, IAppState> {
         subject: "",
         frontSide: "",
         backSide: ""
-      }
+      },
+      formOpen: false
     };
   }
 
@@ -122,6 +124,10 @@ class App extends Component<IAppProps, IAppState> {
     });
   };
 
+  handleToggleForm = () => {
+    this.setState({ formOpen: !this.state.formOpen });
+  };
+
   render() {
     var currentCard: IFlashcard = this.state.cards[this.state.currentIndex];
     return (
@@ -152,6 +158,8 @@ class App extends Component<IAppProps, IAppState> {
               this.handleBackSideChange(event.target.value)
             }
             onAdd={this.handleAdd}
+            formOpen={this.state.formOpen}
+            onToggleForm={this.handleToggleForm}
           />
         </div>
       </React.Fragment>

@@ -7,35 +7,32 @@ interface INewButtonProps {
   onFrontSideChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onBackSideChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: () => void;
-}
-interface INewButtonState {
   formOpen: boolean;
+  onToggleForm: () => void;
 }
+interface INewButtonState {}
 
 class NewButton extends React.Component<INewButtonProps, INewButtonState> {
   constructor(props) {
     super(props);
-    this.state = {
-      formOpen: false
-    };
   }
-
-  toggleForm = () => {
-    this.setState({ formOpen: !this.state.formOpen });
-  };
 
   render() {
     return (
       <React.Fragment>
-        <button className="btn btn-primary m-1" onClick={this.toggleForm}>
+        <button
+          className="btn btn-primary m-1"
+          onClick={this.props.onToggleForm}
+        >
           New Card
         </button>
-        {this.state.formOpen ? (
+        {this.props.formOpen ? (
           <CardForm
             onSubjectChange={this.props.onSubjectChange}
             onFrontSideChange={this.props.onFrontSideChange}
             onBackSideChange={this.props.onBackSideChange}
             onAdd={this.props.onAdd}
+            onToggleForm={this.props.onToggleForm}
           />
         ) : null}
       </React.Fragment>
