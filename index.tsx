@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import { Flashcard } from "./Flashcard";
 import { FlipButton } from "./FlipButton";
 import { NextButton } from "./NextButton";
+import { NewButton } from "./NewButton";
 import { SubjectMenu } from "./SubjectMenu";
 import "./style.css";
 
@@ -17,6 +18,7 @@ interface IAppState {
   onFrontSide: boolean;
   cards: IFlashcard[];
   currentIndex: number;
+  newCard: IFlashcard;
 }
 
 class App extends Component<IAppProps, IAppState> {
@@ -51,7 +53,12 @@ class App extends Component<IAppProps, IAppState> {
           backSide: "The synthesis of a protein from an mRNA template"
         }
       ],
-      currentIndex: 0
+      currentIndex: 0,
+      newCard: {
+        subject: "",
+        frontSide: "",
+        backSide: ""
+      }
     };
   }
 
@@ -74,6 +81,47 @@ class App extends Component<IAppProps, IAppState> {
     });
   };
 
+  handleSubjectChange = (subject: string) => {
+    this.setState({
+      newCard: {
+        subject: subject,
+        frontSide: this.state.newCard.frontSide,
+        backSide: this.state.newCard.backSide
+      }
+    });
+  };
+
+  handleFrontSideChange = (frontSide: string) => {
+    this.setState({
+      newCard: {
+        subject: this.state.newCard.subject,
+        frontSide: frontSide,
+        backSide: this.state.newCard.backSide
+      }
+    });
+  };
+
+  handleBackSideChange = (backSide: string) => {
+    this.setState({
+      newCard: {
+        subject: this.state.newCard.subject,
+        frontSide: this.state.newCard.frontSide,
+        backSide: backSide
+      }
+    });
+  };
+
+  handleAdd = () => {
+    this.setState({
+      cards: this.state.cards.concat(this.state.newCard),
+      newCard: {
+        subject: "",
+        frontSide: "",
+        backSide: ""
+      }
+    });
+  };
+
   render() {
     var currentCard: IFlashcard = this.state.cards[this.state.currentIndex];
     return (
@@ -93,6 +141,18 @@ class App extends Component<IAppProps, IAppState> {
         <div>
           <FlipButton onFlip={this.handleFlip} />
           <NextButton onNext={() => this.handleNext(currentCard.subject)} />
+          <NewButton
+            onSubjectChange={event =>
+              this.handleSubjectChange(event.target.value)
+            }
+            onFrontSideChange={event =>
+              this.handleFrontSideChange(event.target.value)
+            }
+            onBackSideChange={event =>
+              this.handleBackSideChange(event.target.value)
+            }
+            onAdd={this.handleAdd}
+          />
         </div>
       </React.Fragment>
     );
